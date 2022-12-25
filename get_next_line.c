@@ -6,13 +6,13 @@
 /*   By: ahamrad <ahamrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 23:23:20 by ahamrad           #+#    #+#             */
-/*   Updated: 2022/12/24 16:19:48 by ahamrad          ###   ########.fr       */
+/*   Updated: 2022/12/25 17:27:02 by ahamrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_save(char *s)
+char	*ft_get_rest(char *s)
 {
 	char	*rest;
 	int		i;
@@ -36,7 +36,7 @@ char	*ft_save(char *s)
 	return (rest);
 }
 
-char	*ft_line(char *s)
+char	*ft_return_line(char *s)
 {
 	char	*res;
 	int		i;
@@ -53,7 +53,7 @@ char	*ft_line(char *s)
 		res[i] = s[i];
 		i++;
 	}
-	if(s[i] == '\n')
+	if (s[i] == '\n')
 		res[i++] = '\n';
 	res[i] = '\0';
 	return (res);
@@ -74,12 +74,11 @@ char	*ft_read_buffer(int fd, char *s)
 		if (readed == -1)
 		{
 			free(buff);
-			free(s);
 			return (NULL);
 		}
 		buff[readed] = '\0';
 		s = ft_strjoin(s, buff);
-		if (ft_found_new_line(s, '\n'))
+		if (ft_strchr(s, '\n'))
 			break ;
 	}
 	free(buff);
