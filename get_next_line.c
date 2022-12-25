@@ -6,7 +6,7 @@
 /*   By: ahamrad <ahamrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 23:23:20 by ahamrad           #+#    #+#             */
-/*   Updated: 2022/12/25 17:27:02 by ahamrad          ###   ########.fr       */
+/*   Updated: 2022/12/25 18:17:54 by ahamrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,15 @@ char	*ft_get_rest(char *s)
 	if (!rest)
 		return (NULL);
 	j = 0;
+	i++;
 	while (s[i])
 	{
-		if (s[i] == '\n')
-			i++;
-		rest[j++] = s[i++];
+		rest[j] = s[i];
+		j++;
+		i++;
 	}
+	rest[j] = '\0';
 	free(s);
-	s = NULL;
 	return (rest);
 }
 
@@ -42,6 +43,8 @@ char	*ft_return_line(char *s)
 	int		i;
 
 	i = 0;
+	if (!s[i])
+		return (NULL);
 	while (s[i] && s[i] != '\n')
 		i++;
 	res = malloc(sizeof(char) * i + 2);
@@ -54,7 +57,10 @@ char	*ft_return_line(char *s)
 		i++;
 	}
 	if (s[i] == '\n')
-		res[i++] = '\n';
+	{
+		res[i] = '\n';
+		i++;
+	}
 	res[i] = '\0';
 	return (res);
 }
@@ -95,7 +101,7 @@ char	*get_next_line(int fd)
 	s_str = ft_read_buffer(fd, s_str);
 	if (!s_str)
 		return (NULL);
-	line = ft_line(s_str);
-	s_str = ft_save(s_str);
+	line = ft_return_line(s_str);
+	s_str = ft_get_rest(s_str);
 	return (line);
 }
