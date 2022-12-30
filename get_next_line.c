@@ -6,7 +6,7 @@
 /*   By: ahamrad <ahamrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 23:23:20 by ahamrad           #+#    #+#             */
-/*   Updated: 2022/12/28 19:45:58 by ahamrad          ###   ########.fr       */
+/*   Updated: 2022/12/30 17:02:00 by ahamrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,9 @@ char	*ft_return_line(char *s)
 		res = malloc(sizeof(char) * i + 1);
 	if (!res)
 		return (NULL);
-	i = 0;
-	while (s[i] && s[i] != '\n')
-	{
+	i = -1;
+	while (s[++i] && s[i] != '\n')
 		res[i] = s[i];
-		i++;
-	}
 	if (s[i] == '\n')
 	{
 		res[i] = s[i];
