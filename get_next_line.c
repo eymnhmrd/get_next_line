@@ -6,7 +6,7 @@
 /*   By: ahamrad <ahamrad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 23:23:20 by ahamrad           #+#    #+#             */
-/*   Updated: 2022/12/30 17:02:00 by ahamrad          ###   ########.fr       */
+/*   Updated: 2022/12/31 01:48:22 by ahamrad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,7 @@ char	*ft_read_buffer(int fd, char *s)
 		if (readed == 0)
 			break ;
 		if (readed == -1)
-		{
-			free(buff);
-			free(s);
-			return (NULL);
-		}
+			return (free(buff), free(s), NULL);
 		buff[readed] = '\0';
 		s = ft_strjoin(s, buff);
 	}
@@ -104,7 +100,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	s_str = ft_read_buffer(fd, s_str);
 	if (!s_str || *s_str == '\0')
-		return (free(s_str), NULL);
+		return (free(s_str), s_str = NULL, NULL);
 	line = ft_return_line(s_str);
 	s_str = ft_get_rest(s_str);
 	return (line);
